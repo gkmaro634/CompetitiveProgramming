@@ -9,7 +9,7 @@ data_dir = Path(__file__).parent / "data"
 
 @pytest.fixture()
 def setup(test_init):
-    fpath = os.path.join(data_dir, 'handinput.txt')
+    fpath = os.path.join(data_dir, 'test_handinput.txt')
     with open(fpath, 'r') as f:
         content = f.read()
     sys.stdin = io.StringIO(content)
