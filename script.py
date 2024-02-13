@@ -23,8 +23,20 @@ def resolve(N, K, A):
     return dp[N][K]
 
 def execute():
-    N, K = utils.read_two_values()
-    A = utils.read_values()
+    # read single value
+    # N = int(input())
+
+    # read splitted two values
+    # H, W = list(map(int, input().split()))
+
+    # read values
+    # A = list(map(int, input().split()))
+
+    # read 2d values
+    # M = [list(map(int, input().split())) for i in range(N)]
+
+    N, K = list(map(int, input().split()))
+    A = list(map(int, input().split()))
     ret = resolve(N, K, A)
     print(ret)
         
