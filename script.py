@@ -2,8 +2,9 @@
 
 import os
 from pathlib import Path
-import numpy as np
 import utils
+
+import numpy as np
 
 def resolve(N, K, A):
     MOD = 10 ** 9+7
