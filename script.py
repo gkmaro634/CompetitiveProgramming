@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-
-import os
-from pathlib import Path
-import utils
-
 import numpy as np
 
 def resolve(N, K, A):
@@ -44,8 +39,14 @@ def execute():
     return f"{ret}"
 
 if __name__ == '__main__':
-    data_dir = Path(__file__).parent
-    fpath = os.path.join(data_dir, "handinput.txt")
-    utils.replace_stdin(fpath)
+    import sys
+
+    if len(sys.argv) > 1 and sys.argv[1] == "DEBUG":
+        import os
+        from pathlib import Path
+        import utils
+        data_dir = Path(__file__).parent
+        fpath = os.path.join(data_dir, "handinput.txt")
+        utils.replace_stdin(fpath)
 
     execute()
