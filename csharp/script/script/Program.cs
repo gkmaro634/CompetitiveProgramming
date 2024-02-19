@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace script
 {
@@ -15,31 +12,33 @@ namespace script
             //var (H, W) = SplitInt();
 
             // Input
-            var (N, D) = SplitInt();
-            var A = ReadValues();
+            var a = ReadValue();
 
             // Calc
-
+            var ans = a - 5;
 
             // Output
-            var ans = 0;
             Console.WriteLine(ans);
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(ans);
+#endif
         }
 
-        static (int a, int b) SplitInt()
+        static Tuple<int, int> SplitInt()
         {
             var A = Console.ReadLine()
                 .Split(' ')
                 .Select(s => int.Parse(s)).ToArray();
-            return (A[0], A[1]);
+
+            return new Tuple<int, int>(A[0], A[1]);
         }
 
-        static (string a, string b) SplitStr()
+        static Tuple<string, string> SplitStr()
         {
             var S = Console.ReadLine()
                 .Split(' ')
                 .ToArray();
-            return (S[0], S[1]);
+            return new Tuple<string, string>(S[0], S[1]);
         }
 
         static int[] ReadValues()
