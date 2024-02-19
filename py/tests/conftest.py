@@ -11,6 +11,7 @@ import pytest
 
 @pytest.fixture()
 def test_init():
+    sys.path.append("./py")
     pass
 
 if __name__  == "__main__":
