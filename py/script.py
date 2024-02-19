@@ -45,7 +45,7 @@ if __name__ == '__main__':
         import os
         from pathlib import Path
         import utils
-        data_dir = Path(__file__).parent
+        data_dir = Path(__file__).parent.parent
         fpath = os.path.join(data_dir, "handinput.txt")
         utils.replace_stdin(fpath)
 
