@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 import numpy as np
+import sys
+from collections import deque # 幅優先探索用
+import heapq # 優先度付きキュー
+import bisect # 二分探索
+
+# 再帰呼び出しの深さの上限を 120000 に設定
+sys.setrecursionlimit(120000)
 
 def resolve(N, K, A):
     """
@@ -32,19 +39,31 @@ def execute():
 
     # read splitted two values
     # H, W = list(map(int, input().split()))
+    # M, N = list(map(int, input().split()))
 
     # read values
     # A = list(map(int, input().split()))
 
     # read 2d values
     # M = [list(map(int, input().split())) for i in range(N)]
+    # A_B = [list(map(int, input().split())) for i in range(N)]
 
     N, K = list(map(int, input().split()))
     A = list(map(int, input().split()))
     ret = resolve(N, K, A)
     print(ret)
-        
+
+    # 戻り値が配列の場合
+    # for i in range(len(ret)):
+    #     print(ret[i])
+
     return f"{ret}"
+
+def b2ans(true_false, s_true="Yes", s_false='No'):
+    if true_false == True:
+        return s_true
+    else:
+        return s_false
 
 if __name__ == '__main__':
     import sys
