@@ -1,33 +1,42 @@
 #!/usr/bin/env python3
 import numpy as np
+import bisect
+import heapq
 import sys
-from collections import deque # 幅優先探索用
-import heapq # 優先度付きキュー
-import bisect # 二分探索
+from collections import deque
 
 # 再帰呼び出しの深さの上限を 120000 に設定
 sys.setrecursionlimit(120000)
 
-def resolve(N, K, A):
+# def dfs(G, pos, visited):
+#     visited[pos] = True
+#     for node in G[pos]:
+#         if visited[node] == False:
+#             dfs(G, node, visited)
+
+def resolve(N, M, edges):
     """
     問題固有のメソッド。引数や戻り値は問題によって変える。
     """
+    G = [[] for i in range(N+1)]
+    for a, b in edges:
+        G[a].append(b)
+        G[b].append(a)
 
-    MOD = 10 ** 9+7
-
-    dp = [[0] * (K+1) for i in range(N+1)]
-    sum_dp = [[0] * (K+2) for i in range(N+1)]
-
-    dp[0][0] = 1
-
-    for i in range(0, N):
-        for j in range(0, K+1):
-            sum_dp[i][j+1] = (sum_dp[i][j] + dp[i][j]) % MOD
-
-        for j in range(0, K+1):
-            dp[i+1][j] = (sum_dp[i][j+1] - sum_dp[i][max(j - A[i], 0)]) % MOD
-
-    return dp[N][K]
+    # 幅優先
+    # visited = [False] * (N+1)
+    path_l = [-1] * (N+1)
+    to_visit = deque()
+    to_visit.append(1)
+    while len(to_visit) > 0:
+        pos = to_visit.popleft()
+        # visited[pos] = True
+        path_l[pos] += 1
+        for node in G[pos]:
+            if path_l[node] == -1:
+                path_l[node] = path_l[pos]
+                to_visit.append(node)
+    return path_l
 
 def execute():
     """
@@ -46,24 +55,15 @@ def execute():
 
     # read 2d values
     # M = [list(map(int, input().split())) for i in range(N)]
-    # A_B = [list(map(int, input().split())) for i in range(N)]
 
-    N, K = list(map(int, input().split()))
-    A = list(map(int, input().split()))
-    ret = resolve(N, K, A)
-    print(ret)
-
-    # 戻り値が配列の場合
-    # for i in range(len(ret)):
-    #     print(ret[i])
-
+    N, M = list(map(int, input().split()))
+    edges = [list(map(int, input().split())) for i in range(M)]
+    ret = resolve(N, M, edges)
+    for i in range(1, N+1):
+        print(ret[i])
+    # print(ret)
+        
     return f"{ret}"
-
-def b2ans(true_false, s_true="Yes", s_false='No'):
-    if true_false == True:
-        return s_true
-    else:
-        return s_false
 
 if __name__ == '__main__':
     import sys
