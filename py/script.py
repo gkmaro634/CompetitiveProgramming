@@ -39,7 +39,7 @@ def execute():
 
     # read splitted two values
     # H, W = list(map(int, input().split()))
-    # M, N = list(map(int, input().split()))
+    # N, M = list(map(int, input().split()))
 
     # read values
     # A = list(map(int, input().split()))
