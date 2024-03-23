@@ -1,33 +1,35 @@
 #!/usr/bin/env python3
 import numpy as np
 import sys
-from collections import deque # 幅優先探索用
-import heapq # 優先度付きキュー
-import bisect # 二分探索
+from collections import deque  # 幅優先探索用
+import heapq  # 優先度付きキュー
+import bisect  # 二分探索
 
 # 再帰呼び出しの深さの上限を 120000 に設定
 sys.setrecursionlimit(120000)
+
 
 def resolve(N, K, A):
     """
     問題固有のメソッド。引数や戻り値は問題によって変える。
     """
 
-    MOD = 10 ** 9+7
+    MOD = 10**9 + 7
 
-    dp = [[0] * (K+1) for i in range(N+1)]
-    sum_dp = [[0] * (K+2) for i in range(N+1)]
+    dp = [[0] * (K + 1) for i in range(N + 1)]
+    sum_dp = [[0] * (K + 2) for i in range(N + 1)]
 
     dp[0][0] = 1
 
     for i in range(0, N):
-        for j in range(0, K+1):
-            sum_dp[i][j+1] = (sum_dp[i][j] + dp[i][j]) % MOD
+        for j in range(0, K + 1):
+            sum_dp[i][j + 1] = (sum_dp[i][j] + dp[i][j]) % MOD
 
-        for j in range(0, K+1):
-            dp[i+1][j] = (sum_dp[i][j+1] - sum_dp[i][max(j - A[i], 0)]) % MOD
+        for j in range(0, K + 1):
+            dp[i + 1][j] = (sum_dp[i][j + 1] - sum_dp[i][max(j - A[i], 0)]) % MOD
 
     return dp[N][K]
+
 
 def execute():
     """
@@ -57,15 +59,14 @@ def execute():
     # for i in range(len(ret)):
     #     print(ret[i])
 
+    # Yes / No
+    # ans = 'Yes' if ret is True else 'No'
+    # print(ans)
+
     return f"{ret}"
 
-def b2ans(true_false, s_true="Yes", s_false='No'):
-    if true_false == True:
-        return s_true
-    else:
-        return s_false
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
 
     if len(sys.argv) > 1 and sys.argv[1] == "DEBUG":
@@ -74,6 +75,7 @@ if __name__ == '__main__':
         import os
         from pathlib import Path
         import utils
+
         data_dir = Path(__file__).parent.parent
         fpath = os.path.join(data_dir, "handinput.txt")
         utils.replace_stdin(fpath)
